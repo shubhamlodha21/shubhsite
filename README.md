@@ -8,8 +8,28 @@ form persists submissions to the database.
 
 ```
 backend/    FastAPI app (SQLite via SQLAlchemy)
-frontend/   React app (Vite + react-router)
+frontend/   React app (Vite + react-router) — original company site
+web/        SocialXReach SaaS marketing site (Next.js + TypeScript + Tailwind)
 ```
+
+## SocialXReach marketing site (`web/`)
+
+```bash
+cd web
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build
+npm run start      # serve the production build
+npm run lint
+```
+
+- Brand name, links and API URL: `web/src/config/site.ts`
+- Navigation and footer links: `web/src/config/navigation.ts`
+- Plans, prices and the comparison table: `web/src/config/pricing.ts` (demo values)
+- Page content (scenarios, products, solutions, templates, integrations, stories, FAQs): `web/src/content/`
+
+The contact form posts to the backend's `POST /api/contact`, so run the backend too.
+Copy `web/.env.example` to `web/.env.local` to change the site or API URL.
 
 ## Backend
 

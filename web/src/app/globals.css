@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Design tokens
+   Brand colours live here; change them once and the whole site follows.
+------------------------------------------------------------------- */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-ink: #191820;
+  --color-ink-soft: #2a2933;
+  --color-muted: #615f70;
+  --color-subtle: #8c8a99;
+  --color-surface: #f8f7fc;
+  --color-cream: #fffaf5;
+  --color-line: #e9e7f0;
+
+  --color-brand: #6c4cf1;
+  --color-brand-strong: #5636dc;
+  --color-brand-soft: #f2eeff;
+  --color-lilac: #e9e1ff;
+
+  --color-coral: #ff6b78;
+  --color-coral-strong: #d93a4b;
+  --color-coral-soft: #fff0f1;
+  --color-peach: #ffe7da;
+  --color-mint: #dff7ea;
+  --color-mint-strong: #157a4a;
+  --color-sun: #fff2c7;
+
+  --radius-card: 24px;
+  --radius-panel: 20px;
+
+  --shadow-soft: 0 1px 2px rgb(25 24 32 / 0.04), 0 4px 16px -4px rgb(25 24 32 / 0.08);
+  --shadow-float: 0 1px 2px rgb(25 24 32 / 0.05), 0 18px 40px -12px rgb(40 24 110 / 0.22);
+  --shadow-ring: 0 0 0 1px rgb(25 24 32 / 0.06);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-dash: dash 1.4s linear infinite;
+  --animate-ping-soft: ping-soft 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: -16; }
+  }
+  @keyframes menu-in {
+    from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes ping-soft {
+    0% { transform: scale(1); opacity: 0.6; }
+    80%, 100% { transform: scale(2.4); opacity: 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-lilac);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Dotted canvas used behind workflow diagrams */
+  .canvas-dots {
+    background-image: radial-gradient(rgb(108 76 241 / 0.16) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  /* Hide scrollbars on horizontal tab rails while keeping them scrollable */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Scroll reveal: hidden only when JS is active and motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  html.js .reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
